@@ -48,4 +48,8 @@ export const createSession = (data) => api.post('/sessions', data);
 export const getTodaySessions = () => api.get('/sessions/today');
 export const getWeeklySessions = () => api.get('/sessions/weekly');
 
+// Progress
+export const getStreak = () => api.get('/progress/streak');
+export const getActivity = () => api.get('/progress/activity');
+
 export default api;
