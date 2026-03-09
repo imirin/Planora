@@ -47,6 +47,7 @@ export const deleteTopic = (id) => api.delete(`/topics/${id}`);
 export const createSession = (data) => api.post('/sessions', data);
 export const getTodaySessions = () => api.get('/sessions/today');
 export const getWeeklySessions = () => api.get('/sessions/weekly');
+export const getSessions = () => api.get('/sessions');
 
 // Progress
 export const getStreak = () => api.get('/progress/streak');

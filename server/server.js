@@ -35,9 +35,34 @@ app.use('/api/progress', progressRoutes);
 app.use(errorHandler);
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+const dbUri = process.env.MONGODB_URI;
+if (!dbUri) {
+  console.error('ERROR: MONGODB_URI environment variable is not set!');
+  console.error('Please check your .env file');
+} else {
+  // Mask password for logging
+  const maskedUri = dbUri.replace(/\/\/([^:]+):([^@]+)@/, '//$1:****@');
+  console.log(`Connecting to MongoDB Atlas...`);
+  
+  mongoose.connect(dbUri, {
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+  })
+    .then(() => console.log('✅ MongoDB Connected successfully'))
+    .catch(err => {
+      console.error('❌ MongoDB Connection Error:');
+      console.error('URI:', maskedUri);
+      console.error('Database name should be: planora');
+      console.error('Error details:', err.message);
+      if (err.codeName === 'AuthenticationFailed') {
+        console.error('\n⚠️  Authentication failed! Please check:');
+        console.error('   1. Username is correct');
+        console.error('   2. Password is correct (no special characters unescaped)');
+        console.error('   3. User has read/write permissions on the database');
+        console.error('   4. IP address is whitelisted in MongoDB Atlas');
+      }
+    });
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

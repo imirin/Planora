@@ -40,6 +40,16 @@ router.get('/today', auth, async (req, res) => {
   }
 });
 
+// Get all user sessions
+router.get('/', auth, async (req, res) => {
+  try {
+    const sessions = await Session.find({ userId: req.userId }).sort({ date: -1 });
+    res.json({ sessions });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // Get weekly stats (last 7 days)
 router.get('/weekly', auth, async (req, res) => {
   try {

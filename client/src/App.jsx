@@ -7,6 +7,10 @@ import Dashboard from './pages/Dashboard';
 import Subjects from './pages/Subjects';
 import SubjectDetail from './pages/SubjectDetail';
 import Timer from './pages/Timer';
+import Profile from './pages/Profile';
+import Analytics from './pages/Analytics';
+import Calendar from './pages/Calendar';
+import Settings from './pages/Settings';
 
 // Protected Route wrapper
 const ProtectedRoute = ({ children }) => {
@@ -54,6 +58,10 @@ function App() {
         <Route path="subjects" element={<Subjects />} />
         <Route path="subjects/:id" element={<SubjectDetail />} />
         <Route path="timer" element={<Timer />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="analytics" element={<Analytics />} />
+        <Route path="calendar" element={<Calendar />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
     </Routes>
   );
