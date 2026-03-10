@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -8,7 +9,10 @@ const subjectRoutes = require('./routes/subjects');
 const topicRoutes = require('./routes/topics');
 const sessionRoutes = require('./routes/sessions');
 const progressRoutes = require('./routes/progress');
-const errorHandler = require('./middleware/errorHandler');
+const classRoutes = require('./routes/classes');
+const assignmentRoutes = require('./routes/assignments');
+const announcementRoutes = require('./routes/announcements');
+const errorHandler= require('./middleware/errorHandler');
 
 const app = express();
 
@@ -30,6 +34,9 @@ app.use('/api/subjects', subjectRoutes);
 app.use('/api/topics', topicRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/progress', progressRoutes);
+app.use('/api/classes', classRoutes);
+app.use('/api/assignments', assignmentRoutes);
+app.use('/api/announcements', announcementRoutes);
 
 // Error handler
 app.use(errorHandler);

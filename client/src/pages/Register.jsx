@@ -1,24 +1,30 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { register as registerApi } from '../api';
 
-const Register = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
-  const navigate = useNavigate();
+const Register= () => {
+ const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'student' });
+ const [error, setError] = useState('');
+ const [loading, setLoading] = useState(false);
+ const { login } = useAuth();
+ const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+   e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      const res = await registerApi(formData);
+     const res = await registerApi(formData);
       login(res.data.user, res.data.token);
-      navigate('/');
+          
+      // Redirect based on role
+      if (res.data.user.role === 'tutor') {
+       navigate('/tutor-dashboard');
+     } else {
+       navigate('/dashboard');
+     }
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     } finally {
@@ -26,7 +32,7 @@ const Register = () => {
     }
   };
 
-  return (
+ return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
         <h1 className="text-2xl font-bold text-center mb-6">Planora</h1>
@@ -44,7 +50,7 @@ const Register = () => {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+             required
             />
           </div>
           <div>
@@ -54,7 +60,7 @@ const Register = () => {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+             required
             />
           </div>
           <div>
@@ -64,8 +70,35 @@ const Register = () => {
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+             required
             />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2">Register as:</label>
+            <div className="space-y-2">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="role"
+                  value="student"
+                  checked={formData.role === 'student'}
+                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                  className="text-blue-600 focus:ring-blue-500"
+                />
+                <span>Student</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="role"
+                  value="tutor"
+                  checked={formData.role === 'tutor'}
+                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                  className="text-blue-600 focus:ring-blue-500"
+                />
+                <span>Tutor</span>
+              </label>
+            </div>
           </div>
           <button
             type="submit"

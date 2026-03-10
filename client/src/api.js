@@ -49,6 +49,23 @@ export const getTodaySessions = () => api.get('/sessions/today');
 export const getWeeklySessions = () => api.get('/sessions/weekly');
 export const getSessions = () => api.get('/sessions');
 
+// Classes
+export const getClasses = () => api.get('/classes/student');
+export const getTutorClasses = () => api.get('/classes/tutor');
+export const createClass = (data) => api.post('/classes', data);
+export const getClassById = (id) => api.get(`/classes/${id}`);
+export const joinClass = (data) => api.post('/classes/join', data);
+export const deleteClass = (id) => api.delete(`/classes/${id}`);
+
+// Assignments
+export const getAssignments = (classId) => api.get(`/assignments/class/${classId}`);
+export const createAssignment = (data) => api.post('/assignments', data);
+export const deleteAssignment = (id) => api.delete(`/assignments/${id}`);
+
+// Announcements
+export const getAnnouncements = (classId) => api.get(`/announcements/class/${classId}`);
+export const createAnnouncement = (data) => api.post('/announcements', data);
+
 // Progress
 export const getStreak = () => api.get('/progress/streak');
 export const getActivity = () => api.get('/progress/activity');

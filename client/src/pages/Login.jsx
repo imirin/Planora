@@ -18,7 +18,13 @@ const Login = () => {
     try {
       const res = await loginApi(formData);
       login(res.data.user, res.data.token);
-      navigate('/');
+          
+      // Redirect based on role
+      if (res.data.user.role === 'tutor') {
+       navigate('/tutor-dashboard');
+     } else {
+       navigate('/dashboard');
+     }
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {
