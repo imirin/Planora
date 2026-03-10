@@ -4,9 +4,13 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
 const Layout = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+ const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  return (
+const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+ return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
@@ -14,9 +18,9 @@ const Layout = () => {
       {/* Main Content Area */}
       <div className={`
         flex-1 flex flex-col transition-all duration-300 ease-in-out
-        ${sidebarOpen ? 'md:ml-64' : ''}
+        ${sidebarOpen ? 'ml-64' : 'ml-0'}
       `}>
-        <Navbar onMenuClick={() => setSidebarOpen(true)} />
+        <Navbar onMenuClick={toggleSidebar} />
         <main className="flex-1 px-4 py-6 w-full">
           <div className={`${sidebarOpen ? 'max-w-7xl' : 'max-w-7xl mx-auto'} w-full`}>
             <Outlet />

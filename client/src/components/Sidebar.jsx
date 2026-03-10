@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
   LayoutDashboard, 
@@ -13,17 +13,17 @@ import {
 } from 'lucide-react';
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const location = useLocation();
-  const { logout } = useAuth();
+ const location = useLocation();
+ const { logout } = useAuth();
 
-  const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/');
+const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/');
 
-  const handleLogout = () => {
+const handleLogout = () => {
     logout();
     onClose();
   };
 
-  const navItems = [
+const navItems = [
     { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/subjects', icon: Folder, label: 'Subjects' },
     { path: '/timer', icon: Clock, label: 'Timer' },
@@ -33,7 +33,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     { path: '/settings', icon: Settings, label: 'Settings' },
   ];
 
-  return (
+ return (
     <>
       {/* Overlay */}
       {isOpen && (
@@ -51,7 +51,6 @@ const Sidebar = ({ isOpen, onClose }) => {
           w-64
           flex flex-col
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-          md:translate-x-0 md:static md:shadow-md
         `}
       >
         {/* Header with close button */}
@@ -68,10 +67,10 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Navigation Items */}
         <nav className="flex flex-col flex-1 overflow-y-auto p-4 space-y-1">
           {navItems.map((item) => {
-            const Icon = item.icon;
-            const active = isActive(item.path);
+          const Icon = item.icon;
+          const active = isActive(item.path);
             
-            return (
+          return (
               <Link
                 key={item.path}
                 to={item.path}
