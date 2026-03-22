@@ -15,13 +15,19 @@ const handleSubmit = async (e) => {
     setLoading(true);
     setError('');
 
+    // Debug: Log payload before sending
+    console.log('Register payload:', formData);
+
     try {
      const res = await registerApi(formData);
       login(res.data.user, res.data.token);
           
-      // Redirect based on role
+      // Debug logging
+      console.log('User role:', res.data.user.role);
+      
+      // Redirect based on role - FIXED PATHS
       if (res.data.user.role === 'tutor') {
-       navigate('/tutor-dashboard');
+       navigate('/tutor/dashboard');
      } else {
        navigate('/dashboard');
      }

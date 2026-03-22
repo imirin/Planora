@@ -9,7 +9,10 @@ const router = express.Router();
 // Register
 router.post('/register', async (req, res) => {
   try {
-   const { name, email, password } = req.body;
+   const { name, email, password, role } = req.body;
+
+   // Debug: Log incoming role
+   console.log('Incoming role:', role);
 
    const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -17,8 +20,16 @@ router.post('/register', async (req, res) => {
     }
 
    const hashedPassword = await bcrypt.hash(password, 10);
-   const user = new User({ name, email, password: hashedPassword });
+   const user = new User({ 
+     name, 
+     email, 
+     password: hashedPassword,
+     role: role || 'student' // Use role from request or default to student
+    });
     await user.save();
+
+   // Debug: Log saved role
+   console.log('Saved user role:', user.role);
 
    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: '7d'

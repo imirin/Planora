@@ -13,7 +13,10 @@ import Analytics from'./pages/Analytics';
 import Calendar from'./pages/Calendar';
 import Settings from'./pages/Settings';
 import TutorDashboard from'./pages/tutor/TutorDashboard';
-import MyClasses from'./pages/MyClasses';
+import TutorClasses from'./pages/tutor/TutorClasses';
+import CreateClass from'./pages/tutor/CreateClass';
+import MyClasses from'./pages/student/MyClasses';
+import JoinClass from'./pages/student/JoinClass';
 
 // Protected Route wrapper
 const ProtectedRoute = ({ children }) => {
@@ -45,7 +48,7 @@ const StudentRoute = ({ children }) => {
 
  // Only redirect if user explicitly has tutor role
  if (user.role === 'tutor') {
-  return <Navigate to="/tutor-dashboard"replace />;
+  return <Navigate to="/tutor/dashboard"replace />;
  }
 
  return children;
@@ -87,7 +90,7 @@ const PublicRoute = ({ children }) => {
  // If already logged in, redirect to appropriate dashboard
  if (token && user) {
   if (user.role === 'tutor') {
-   return <Navigate to="/tutor-dashboard" />;
+   return <Navigate to="/tutor/dashboard" />;
   }
   return <Navigate to="/dashboard" />;
  }
@@ -135,6 +138,7 @@ function App() {
       <Route path="calendar" element={<Calendar />} />
       <Route path="settings" element={<Settings />} />
       <Route path="my-classes" element={<MyClasses />} />
+      <Route path="join-class" element={<JoinClass />} />
     </Route>
 
    {/* Tutor Routes */}
@@ -148,6 +152,8 @@ function App() {
    >
     <Route index element={<TutorDashboard />} />
     <Route path="dashboard" element={<TutorDashboard />} />
+    <Route path="classes" element={<TutorClasses />} />
+    <Route path="classes/create" element={<CreateClass />} />
    </Route>
 
    {/* Fallback Route - Redirect based on role */}

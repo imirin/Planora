@@ -19,9 +19,12 @@ const Login = () => {
       const res = await loginApi(formData);
       login(res.data.user, res.data.token);
           
-      // Redirect based on role
+      // Debug logging
+      console.log('User role:', res.data.user.role);
+      
+      // Redirect based on role - FIXED PATHS
       if (res.data.user.role === 'tutor') {
-       navigate('/tutor-dashboard');
+       navigate('/tutor/dashboard');
      } else {
        navigate('/dashboard');
      }

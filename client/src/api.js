@@ -52,10 +52,14 @@ export const getSessions = () => api.get('/sessions');
 // Classes
 export const getClasses = () => api.get('/classes/student');
 export const getTutorClasses = () => api.get('/classes/tutor');
-export const createClass = (data) => api.post('/classes', data);
+export const createClass = (data) => api.post('/classes/create', data);
 export const getClassById = (id) => api.get(`/classes/${id}`);
+export const getClassDetails = (id) => api.get(`/classes/${id}`);
 export const joinClass = (data) => api.post('/classes/join', data);
 export const deleteClass = (id) => api.delete(`/classes/${id}`);
+export const getStudentClasses = () => api.get('/classes/student');
+export const addAssignment = (id, data) => api.post(`/classes/${id}/assignment`, data);
+export const getClassStudents = (id) => api.get(`/classes/${id}/students`);
 
 // Assignments
 export const getAssignments = (classId) => api.get(`/assignments/class/${classId}`);
