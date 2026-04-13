@@ -52,8 +52,8 @@ Planora is a full-stack web application designed to help users manage study plan
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
-git clone https://github.com/your-username/planora.git
-cd planora
+git clone https://github.com/imirin/Planora.git
+cd Planora
 
 ---
 
