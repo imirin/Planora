@@ -52,23 +52,34 @@ export const getSessions = () => api.get('/sessions');
 // Classes
 export const getClasses = () => api.get('/classes/student');
 export const getTutorClasses = () => api.get('/classes/tutor');
+export const getTutorStats = () => api.get('/classes/tutor/stats');
+export const getTutorStudents = () => api.get('/classes/tutor/students');
 export const createClass = (data) => api.post('/classes/create', data);
 export const getClassById = (id) => api.get(`/classes/${id}`);
 export const getClassDetails = (id) => api.get(`/classes/${id}`);
 export const joinClass = (data) => api.post('/classes/join', data);
 export const deleteClass = (id) => api.delete(`/classes/${id}`);
 export const getStudentClasses = () => api.get('/classes/student');
-export const addAssignment = (id, data) => api.post(`/classes/${id}/assignment`, data);
 export const getClassStudents = (id) => api.get(`/classes/${id}/students`);
-
-// Assignments
+export const getClassLeaderboard = (id) => api.get(`/classes/${id}/leaderboard`);
+// Class-embedded Assignments
+export const addAssignment = (id, data) => api.post(`/classes/${id}/assignment`, data);
+export const getClassAssignments = (id) => api.get(`/classes/${id}/assignments`);
+export const deleteClassAssignment = (classId, assignmentId) => api.delete(`/classes/${classId}/assignments/${assignmentId}`);
+export const submitAssignment = (classId, assignmentId, data) => api.post(`/classes/${classId}/assignments/${assignmentId}/submit`, data);
+export const getAssignmentSubmissions = (classId, assignmentId) => api.get(`/classes/${classId}/assignments/${assignmentId}/submissions`);
+// Class-embedded Announcements
+export const getClassAnnouncements = (id) => api.get(`/classes/${id}/announcements`);
+export const addClassAnnouncement = (id, data) => api.post(`/classes/${id}/announcements`, data);
+export const deleteClassAnnouncement = (classId, announcementId) => api.delete(`/classes/${classId}/announcements/${announcementId}`);
+// Legacy Assignments (separate model)
 export const getAssignments = (classId) => api.get(`/assignments/class/${classId}`);
 export const createAssignment = (data) => api.post('/assignments', data);
 export const deleteAssignment = (id) => api.delete(`/assignments/${id}`);
-
-// Announcements
+// Legacy Announcements (separate model)
 export const getAnnouncements = (classId) => api.get(`/announcements/class/${classId}`);
 export const createAnnouncement = (data) => api.post('/announcements', data);
+export const deleteAnnouncement = (id) => api.delete(`/announcements/${id}`);
 
 // Progress
 export const getStreak = () => api.get('/progress/streak');

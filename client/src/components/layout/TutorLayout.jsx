@@ -31,17 +31,17 @@ const handleLogout = () => {
  };
 
 const navItems = [
-   { path: '/tutor-dashboard', icon: LayoutDashboard, label: 'Tutor Dashboard' },
-   { path: '/classes', icon: BookOpen, label: 'Classes' },
-   { path: '/students', icon: Users, label: 'Students' },
-   { path: '/assignments', icon: ClipboardList, label: 'Assignments' },
-   { path: '/leaderboard', icon: Trophy, label: 'Leaderboard' },
-   { path: '/announcements', icon: Megaphone, label: 'Announcements' },
+   { path: '/tutor/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+   { path: '/tutor/classes', icon: BookOpen, label: 'Classes' },
+   { path: '/tutor/students', icon: Users, label: 'Students' },
+   { path: '/tutor/assignments', icon: ClipboardList, label: 'Assignments' },
+   { path: '/tutor/leaderboard', icon: Trophy, label: 'Leaderboard' },
+   { path: '/tutor/announcements', icon: Megaphone, label: 'Announcements' },
  ];
 
 const bottomNavItems = [
-   { path: '/profile', icon: User, label: 'Profile' },
-   { path: '/settings', icon: Settings, label: 'Settings' },
+   { path: '/tutor/profile', icon: User, label: 'Profile' },
+   { path: '/tutor/settings', icon: Settings, label: 'Settings' },
  ];
 
  // Check if route is active

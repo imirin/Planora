@@ -30,18 +30,16 @@ const classSchema = new mongoose.Schema({
     title: String,
     description: String,
     dueDate: Date,
-    createdAt: {
-      type: Date,
-      default: Date.now
-    }
+    createdAt: { type: Date, default: Date.now },
+    submissions: [{
+      student: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      content: String,
+      submittedAt: { type: Date, default: Date.now }
+    }]
   }],
   announcements: [{
-    title: String,
     message: String,
-    createdAt: {
-      type: Date,
-      default: Date.now
-    }
+    createdAt: { type: Date, default: Date.now }
   }]
 }, {
   timestamps: true
